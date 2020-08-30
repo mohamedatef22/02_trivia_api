@@ -38,7 +38,10 @@ def create_app(test_config=None):
     @cross_origin()
     def get_all_categories():
         allCategories = Category.query.all()
-        return jsonify([cat.type for cat in allCategories])
+        res = {}
+        for cat in allCategories:
+            res[cat.id] = cat.type
+        return jsonify(res)
 
     '''
     @TOD:
@@ -146,8 +149,8 @@ def create_app(test_config=None):
     @app.route('/category/<int:category_id>/questions')
     @cross_origin()
     def get_questions_by_category(category_id):
-        questions = Question.query.filter(Question.category
-                                          == category_id).all()
+        questions = Question.query.filter(Question.category ==
+                                          category_id).all()
         if len(questions) == 0:
             abort(404)
         return jsonify({
@@ -187,7 +190,6 @@ def create_app(test_config=None):
                 })
             randomNumber = randint(0, len(all_questions)-1)
             questionId = all_questions[randomNumber].id
-            print(randomNumber, questionId)
             if questionId in previous_questions:
                 continue
 

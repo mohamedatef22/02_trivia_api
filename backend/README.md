@@ -109,6 +109,7 @@ python test_flaskr.py
 # GET '/questions'
 -get all question with pagination as 10 question per page , total number of questions & categories.\
 -Request Argument: page = page number in header.\
+-if given page not exist 404 error will return.\ 
 -return response.\
 ```
 {
@@ -193,5 +194,111 @@ python test_flaskr.py
         }
     ],
     "total_questions": 20
+}
+```
+# DELETE '/questions/<int:question_id>'
+-Delete the question with given id in url
+-if trying to delete not existing question 422 error code will be returned.\
+-if deleted succefully response that will be returned.\
+```
+{
+    "success": true
+}
+```
+
+# POST '/questions'
+-post new question.\
+-request arguments: must send question, answer, difficulty& category.\
+-any missing argument or failed to post question 422 error will returned.\
+-if success response that will return.\
+```
+{
+    "success": true
+}
+```
+
+# POST '/search'
+-post search term as data in request body.\
+-will return all questions that include substring of search term.\
+```
+returned response for "searchTerm":"boxer"
+{
+    "questions": [
+        {
+            "answer": "Muhammad Ali",
+            "category": 4,
+            "difficulty": 1,
+            "id": 9,
+            "question": "What boxer's original name is Cassius Clay?"
+        }
+    ]
+}
+```
+# GET '/category/<int:category_id>/questions'
+-get questions based on category.\
+-if no questions in category or no category 404 error will returned.\
+-return response.\
+```
+{
+    "current_category": 1,
+    "questions": [
+        {
+            "answer": "The Liver",
+            "category": 1,
+            "difficulty": 4,
+            "id": 20,
+            "question": "What is the heaviest organ in the human body?"
+        },
+        {
+            "answer": "Alexander Fleming",
+            "category": 1,
+            "difficulty": 3,
+            "id": 21,
+            "question": "Who discovered penicillin?"
+        },
+        {
+            "answer": "Blood",
+            "category": 1,
+            "difficulty": 4,
+            "id": 22,
+            "question": "Hematology is a branch of medicine involving the study of what?"
+        },
+        {
+            "answer": "a",
+            "category": 1,
+            "difficulty": 1,
+            "id": 38,
+            "question": "a"
+        },
+        {
+            "answer": "a1",
+            "category": 1,
+            "difficulty": 1,
+            "id": 39,
+            "question": "a1"
+        }
+    ],
+    "total_questions": 5
+}
+```
+# POST '/quizzes'
+-Get questions to play the quiz.\
+-This endpoint should take category and previous question parameters and return a random questions within the given category.\
+-should send previous_questions and category of question and return next random question.\
+```
+Request :
+{
+"previous_questions":[],
+"quiz_category":{"id":1}
+}
+response:
+{
+    "question": {
+        "answer": "Alexander Fleming",
+        "category": 1,
+        "difficulty": 3,
+        "id": 21,
+        "question": "Who discovered penicillin?"
+    }
 }
 ```

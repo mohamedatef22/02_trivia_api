@@ -100,3 +100,10 @@ python test_flaskr.py
 ```
 
 ## API
+#GET '/categories'
+-get all categories as dictionary which key are ids and value is type of categories
+-Request Arguments:None;
+-return response like this
+![g1](https://user-images.githubusercontent.com/34000758/91659194-c48da080-eace-11ea-9533-f4f4ec67679e.PNG)
+
+
